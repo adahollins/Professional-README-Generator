@@ -3,6 +3,7 @@ const path = require('path');
 const inquirer = require("inquirer");
 const generateMarkdown = require("./utils/generateMarkdown");
 
+
 // array of questions for user
 const questions = [
     {
@@ -54,44 +55,16 @@ const questions = [
 
 // function to write README file
 function writeToFile(fileName, data) {
-    `
-    # ${questions.title}
-
-    ## Description
-    ${questions.description}
-
-    ## Table of Contents
-    - [Installation](#installation)
-    - [Usage](#usage)
-    - [License](#license)
-    - [Credits](#credits)
-    - [Tests](#tests)
-    - [Questions](#questions)
-
-    ## Installation
-    ${questions.installation}
-
-    ## Usage
-    ${questions.usage}
-
-    ## License
-    ${questions.license}
-
-    ## Credits
-    ${questions.credit}
-
-    ## Tests
-    ${questions.tests}
-
-    ## Questions
-    For any questions you, you can contact me through my GitHub (${questions.github}) or my email (${questions.email}).
-    `;
-}
+    return
+};
 
 // function to initialize program
 function init() {
-    writeToFile("README.md", questions)
-}
+    inquirer.prompt(questions)
+    .then((answers) => {
+    writeToFile('./UserREADME.md', generateMarkdown(answers))
+    });
+};
 
 // function call to initialize program
 init();
